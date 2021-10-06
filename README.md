@@ -8,7 +8,9 @@
 
 For IWSLT'14 DE<->EN and WMT 14 EN->DE, We use fairseq-generate command to evaluate BLEU score, using a command like this:
 
+```
 fairseq-generate DATA-BIN --path CHECKPOINT-PATH/checkpoint_best.pt --source-lang en --target-lang de --remove-bpe  --beam 5 --quiet
+```
 
 # Dialog: 
 
