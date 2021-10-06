@@ -149,7 +149,8 @@ When you have added your fuction here, you can ignore hyper-parameter '--alpha' 
 We will show you how to use 2 iterations, and you can follow the guide to extend more.                                                                   
                                                                    
 Start with /fairseq/fairseq/models/transformer.py, line 285:                                                               
-          ```python
+
+```python
                                                                    
         decoder_out2 = None
         decoder_out3 = None # new added
@@ -213,13 +214,13 @@ Start with /fairseq/fairseq/models/transformer.py, line 285:
         
          # note that here we add an extra return value                                                    
         return decoder_out1, decoder_out2, decoder_out3                                                    
-        ```
+```
 
                                                              
 Besides, you should modify /fairseq/fairseq/criterions/label_smoothed_cross_entropy.py, line 68. The number of return values should match with iterations you use.
 Here, cause we add an extra iteration, we should add a return value and name it as net_output3. We also need to pass this new parameter to fuction compute_loss, which is in line 71.
                                                              
-                                                             ```python
+                                                             ```
         net_output1, net_output2, net_output3 = model(**sample["net_input"], mix_ratio=mix_ratio)       
 
         loss, nll_loss = self.compute_loss(model, net_output1, net_output2, net_output3, sample, mix_ratio, reduce=reduce)
@@ -228,7 +229,7 @@ Here, cause we add an extra iteration, we should add a return value and name it 
 In line 100, don't forget add a parameter in function prototype of compute_loss:
             
                                                              
-                                                             ``` python
+                                                             ``` 
             
             def compute_loss(self, model, net_output1, net_output2, net_output3, sample, mix_ratio, reduce=True):
                                                              ```
