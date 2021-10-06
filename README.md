@@ -2,6 +2,8 @@
 
 This is the source code and some evaluation scripts for our paper <TARGET-SIDEDATAAUGMENTATION  FORSEQUENCEGENERATION>.        
 
+Our code is based on https://github.com/pytorch/fairseq.
+        
 Note that in this repo, we set 'beta' = 1 and 'iteration' = 1, while you can specify 'temperature' and 'alpha(fixed)' in commands. (all details about these hyper-parameters can be found in section 4.4 in our paper). Besides, you can modify our code to use schedule alpha, more iterations, and different beta. We will show how to modify our code in the end of this file.
 
 # COMMANDS
@@ -230,7 +232,7 @@ In line 100, don't forget add a parameter in function prototype of compute_loss:
             
                                                              
 ```python            
-            def compute_loss(self, model, net_output1, net_output2, net_output3, sample, mix_ratio, reduce=True):
+         def compute_loss(self, model, net_output1, net_output2, net_output3, sample, mix_ratio, reduce=True):
 ```
             
 In this fuction, copy the code of the first iteration, and paste it in the end. Then, just modify some variables' names. Don't forget modify the loss fuction by the way.
