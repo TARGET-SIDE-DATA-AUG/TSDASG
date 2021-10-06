@@ -220,19 +220,18 @@ Start with /fairseq/fairseq/models/transformer.py, line 285:
 Besides, you should modify /fairseq/fairseq/criterions/label_smoothed_cross_entropy.py, line 68. The number of return values should match with iterations you use.
 Here, cause we add an extra iteration, we should add a return value and name it as net_output3. We also need to pass this new parameter to fuction compute_loss, which is in line 71.
                                                              
-                                                             ```
+```python
         net_output1, net_output2, net_output3 = model(**sample["net_input"], mix_ratio=mix_ratio)       
 
         loss, nll_loss = self.compute_loss(model, net_output1, net_output2, net_output3, sample, mix_ratio, reduce=reduce)
-                                                             ```
+```
                                                              
 In line 100, don't forget add a parameter in function prototype of compute_loss:
             
                                                              
-                                                             ``` 
-            
+```python            
             def compute_loss(self, model, net_output1, net_output2, net_output3, sample, mix_ratio, reduce=True):
-                                                             ```
+```
             
 In this fuction, copy the code of the first iteration, and paste it in the end. Then, just modify some variables' names. Don't forget modify the loss fuction by the way.
             
