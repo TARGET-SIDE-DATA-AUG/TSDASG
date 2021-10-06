@@ -18,10 +18,11 @@ fairseq-generate DATA-BIN --path CHECKPOINT-PATH/checkpoint_best.pt --source-lan
 
 Then, use 'scripts/compute_score.py' to compute its BLEU score, and use 'scripts/eval_nlg.py' to compute metrics like Met., CIDEr, and R-L. You should specify which file to compute like this:
 
-'''
+```
 python compute_score.py OUTPUT_FILE
+
 python eval_nlg.py OUTPUT_FILE
-'''
+```
 
 # Summarization
 
