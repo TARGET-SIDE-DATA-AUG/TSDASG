@@ -95,6 +95,9 @@ fairseq-train DATA-BIN -a transformer \
 
 
 ### Summarization:
+
+We use CNN/DM dataset.
+        
 ```
 #!/bin/bash
 
