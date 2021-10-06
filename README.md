@@ -40,7 +40,7 @@ fairseq-train DATA-BIN -a transformer_iwslt_de_en \
 
 Setting for the Persona-Chat dataset:
 
-"""
+```
 fairseq-train DATA-BIN -a transformer \
         --optimizer adam --lr 0.0001 -s cxt -t res --label-smoothing 0.1 --dropout 0.3 \
         --max-tokens 4000 --min-lr '1e-09' \
@@ -50,7 +50,7 @@ fairseq-train DATA-BIN -a transformer \
         --eval-bleu-detok moses --eval-bleu-remove-bpe --eval-bleu-print-samples  --best-checkpoint-metric bleu \        
         --maximize-best-checkpoint-metric  --task translation --mixratio 0.4 --temperature 4.5  \       
         --activation-dropout 0.1 --attention-dropout 0.1  --log-format json --log-interval 50        
-"""
+```
 
 Setting for the DailyDialog dataset:
 
