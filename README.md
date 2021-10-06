@@ -13,6 +13,24 @@ Note that in this repo, we set 'beta' = 1 and 'iteration' = 1, while you can spe
 
 Setting for the WMT'14 EN->DE dataset:
 
+```
+fairseq-train ./wmt14_ende/data-bin/ \
+        -a transformer --optimizer adam --lr 0.001 \
+        -s en -t de --label-smoothing 0.1 \
+        --dropout 0.1 --relu-dropout 0.1 --attention-dropout 0.1 \
+        --max-tokens 4096 --update-freq 16 \
+        --min-lr '1e-09' --lr-scheduler inverse_sqrt \
+        --criterion label_smoothed_cross_entropy --max-update 500000 --warmup-updates 4000 \
+        --warmup-init-lr '1e-07' --adam-betas '(0.9, 0.98)' \
+        --save-dir ckpt --share-all-embeddings \
+        --eval-bleu --eval-bleu-args '{"beam": 5, "max_len_a": 1.2, "max_len_b": 10}' \
+        --eval-bleu-detok moses --eval-bleu-remove-bpe \
+        --valid-subset "valid,test" \
+        --best-checkpoint-metric bleu --maximize-best-checkpoint-metric \
+        --seed 1 --mixratio 0.5 \
+        --no-avg-loss --temperature 2 --fp16
+```
+        
 Setting for the IWSLT'14 DE<->EN dataset:
 
 2 ROUNDS:
@@ -115,8 +133,12 @@ python eval_nlg.py OUTPUT_FILE
 
 ### Summarization
 
+Same as above.
+        
 # MODIFICATION
 
+Bigger or smaller beta, schedule alpha, or more iterations aren't that good, so we didn't leave any args in commands to modify them. However, if you want to figure out their effects, you can follow our guide below to extend our code.        
+        
 ## Beta
 
 In /fairseq/fairseq/criterions/label_smoothed_cross_entropy.py, line 132:
