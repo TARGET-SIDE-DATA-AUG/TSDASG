@@ -2,9 +2,9 @@
 
 
 
-## EVALUATION 
+# EVALUATION 
 
-# Machine Translation:
+## Machine Translation:
 
 For IWSLT'14 DE<->EN and WMT 14 EN->DE, We use fairseq-generate command to evaluate BLEU score, using a command like this:
 
@@ -12,7 +12,7 @@ For IWSLT'14 DE<->EN and WMT 14 EN->DE, We use fairseq-generate command to evalu
 fairseq-generate DATA-BIN --path CHECKPOINT-PATH/checkpoint_best.pt --source-lang en --target-lang de --remove-bpe  --beam 5 --quiet
 ```
 
-# Dialog: 
+## Dialog: 
 
 First of all, you should output the prediction of the test set to a file, using a command like this (Note that for dialog datasets, we use beam size 4 to generate):
 
@@ -26,5 +26,5 @@ python compute_score.py OUTPUT_FILE
 python eval_nlg.py OUTPUT_FILE
 ```
 
-# Summarization
+## Summarization
 
