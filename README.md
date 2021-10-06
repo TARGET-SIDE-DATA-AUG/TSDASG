@@ -122,3 +122,21 @@ In /fairseq/fairseq/criterions/label_smoothed_cross_entropy.py, line 132:
 ```python
      loss_total_without_kd = loss2 * mix_ratio + loss * (1 - mix_ratio) + dk       
 ```
+        
+Here, 'beta' stands for the coefficient of 'dk'. Empirically, 'beta' = 1 gives the best performance. You can change this line to try different 'beta', such as '2 * dk', which means 'beta' is 2.
+        
+## Schedule alpha
+
+Empirically, fixed alpha is good in our method, but you can design your own schedule alpha function and use it.
+
+In /home/ypd-24-1/fairseq/fairseq_cli/train.py, line 137, please add your schedule alpha fuction here. For example:
+        
+```python
+    while lr > args.min_lr and epoch_itr.next_epoch_idx <= max_epoch :
+
+        mix_ratio = 1.5 / np.sqrt(np.log(epoch) + 1)    # Write your fuction here.
+                                                            
+        .....
+                                                                   
+                                                               
+```
