@@ -14,7 +14,7 @@ Note that in this repo, we set 'beta' = 1 and 'iteration' = 1, while you can spe
 Setting for the WMT'14 EN->DE dataset:
 
 ```
-fairseq-train ./wmt14_ende/data-bin/ \
+fairseq-train DATA-BIN \
         -a transformer --optimizer adam --lr 0.001 \
         -s en -t de --label-smoothing 0.1 \
         --dropout 0.1 --relu-dropout 0.1 --attention-dropout 0.1 \
