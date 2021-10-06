@@ -2,9 +2,12 @@
 
 This is the source code and some evaluation scripts for our paper <TARGET-SIDEDATAAUGMENTATION  FORSEQUENCEGENERATION>.        
 
-# TRAIN
+Note that in this repo, we set 'beta' = 1 and 'iteration' = 1, while you can specify 'temperature' and 'alpha(fixed)' in commands. (all details about these hyper-parameters can be found in section 4.4 in our paper). Besides, you can modify our code to use schedule alpha, more iterations, and different beta. We will show how to modify our code in the end of this file.
 
-## Machine Translation:
+# COMMANDS
+## TRAIN
+
+### Machine Translation:
 
 Setting for the WMT'14 EN->DE dataset:
 
@@ -38,7 +41,7 @@ fairseq-train DATA-BIN -a transformer_iwslt_de_en \
         --activation-dropout 0.1 --attention-dropout 0.1  --log-format json --log-interval 50
 ```
 
-## Dialog:
+### Dialog:
 
 Setting for the Persona-Chat dataset:
 
@@ -71,15 +74,15 @@ fairseq-train DATA-BIN -a transformer \
 ```
 
 
-## Summarization:
+### Summarization:
 
-## Other tasks:
+### Other tasks:
 
 Our method is universal so that you can use it on other sequence generation tasks and datasets. You can find details in 'Ablation' in our paper to know how to set the best values of 'temperature' and 'mixratio' of datasets you are using.
 
-# EVALUATION 
+## EVALUATION 
 
-## Machine Translation:
+### Machine Translation:
 
 We use fairseq-generate command to evaluate BLEU score, using a command like this:
 
@@ -89,7 +92,7 @@ fairseq-generate DATA-BIN --path CHECKPOINT-PATH/checkpoint_best.pt \
         --remove-bpe  --beam 5  --quiet
 ```
 
-## Dialog: 
+### Dialog: 
 
 First of all, you should output the prediction of the test set to a file, using a command like this (Note that for dialog datasets, we use beam size 4 to generate):
 
@@ -108,5 +111,4 @@ python compute_score.py OUTPUT_FILE
 python eval_nlg.py OUTPUT_FILE
 ```
 
-## Summarization
-
+### Summarization
