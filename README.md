@@ -33,7 +33,7 @@ fairseq-train DATA-BIN \
         
 Setting for the IWSLT'14 DE<->EN dataset:
 
-2 ROUNDS:
+1 more iteration(default):
 
 ```
 fairseq-train DATA-BIN -a transformer_iwslt_de_en \
@@ -47,7 +47,7 @@ fairseq-train DATA-BIN -a transformer_iwslt_de_en \
         --activation-dropout 0.1 --attention-dropout 0.1  --log-format json --log-interval 50
 ```
 
-3 ROUNDS: 
+2 more iterations(need modify code, please see our guide in the end): 
 
 ```
 fairseq-train DATA-BIN -a transformer_iwslt_de_en \
