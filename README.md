@@ -112,3 +112,13 @@ python eval_nlg.py OUTPUT_FILE
 ```
 
 ### Summarization
+
+# MODIFICATION
+
+## BETA
+
+In /fairseq/fairseq/criterions/label_smoothed_cross_entropy.py, line 132:
+
+```python
+     loss_total_without_kd = loss2 * mix_ratio + loss * (1 - mix_ratio) + dk       
+```
