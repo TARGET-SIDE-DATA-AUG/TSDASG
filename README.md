@@ -95,7 +95,45 @@ fairseq-train DATA-BIN -a transformer \
 
 
 ### Summarization:
+```
+#!/bin/bash
 
+STORE=XXX
+TOTAL_NUM_UPDATES=30000  
+WARMUP_UPDATES=500
+LR=3e-05
+MAX_TOKENS=1024
+UPDATE_FREQ=8
+BART_PATH=$STORE/bart/bart.large/model.pt
+
+
+fairseq-train $STORE/data/cnn_dm-bin \
+    --restore-file $BART_PATH \
+    --max-tokens $MAX_TOKENS \
+    --task translation \
+    --source-lang source --target-lang target \
+    --truncate-source \
+    --layernorm-embedding \
+    --share-all-embeddings \
+    --share-decoder-input-output-embed \
+    --reset-optimizer --reset-dataloader --reset-meters \
+    --required-batch-size-multiple 1 \
+    --arch bart_large \
+    --criterion label_smoothed_cross_entropy \
+    --label-smoothing 0.1 \
+    --dropout 0.1 --attention-dropout 0.1 --relu-dropout 0.1 \
+    --weight-decay 0.01 --optimizer adam --adam-betas "(0.9, 0.999)" --adam-eps 1e-08 \
+    --clip-norm 0.1 \
+    --lr-scheduler polynomial_decay --lr $LR --total-num-update $TOTAL_NUM_UPDATES --max-update $TOTAL_NUM_UPDATES \
+    --warmup-updates $WARMUP_UPDATES \
+    --fp16 --update-freq $UPDATE_FREQ \
+    --skip-invalid-size-inputs-valid-test \
+    --alpha "0.5" \
+    --temperature "0.1" \
+    --no-avg-loss \
+    --save-dir ckpt
+```
+        
 ### Other tasks:
 
 Our method is universal so that you can use it on other sequence generation tasks and datasets. You can find details in 'Ablation' in our paper to know how to set the best values of 'temperature' and 'alpha' of datasets you are using.
