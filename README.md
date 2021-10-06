@@ -1,5 +1,7 @@
 # TARGET-SIDE-DATA-AUGMENTATION--FOR-SEQ-GENERATION
 
+This is the source code and some evaluation scripts for our paper <TARGET-SIDEDATAAUGMENTATION  FORSEQUENCEGENERATION>.        
+
 # TRAIN
 
 ## Machine Translation:
@@ -71,9 +73,9 @@ fairseq-train DATA-BIN -a transformer \
 
 ## Summarization:
 
-## OTHER TASKS:
+## Other tasks:
 
-Our method is universal so that you can use it on other sequence generation tasks and datasets. You can find details in 'Ablation' in our paper to know how to set the best hyper-parameters mentioned above of datasets you are using.
+Our method is universal so that you can use it on other sequence generation tasks and datasets. You can find details in 'Ablation' in our paper to know how to set the best values of 'temperature' and 'mixratio' of datasets you are using.
 
 # EVALUATION 
 
