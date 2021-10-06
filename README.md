@@ -4,12 +4,6 @@
 
 ## Machine Translation:
 
-For IWSLT'14 DE<->EN and WMT 14 EN->DE, you can 
-
-## Dialog:
-
-In our paper, we use DailyDialog and Persona-Chat. (We only use the self_original direction of Persona-Chat data in our experiments)
-
 Setting for the WMT'14 EN->DE dataset:
 
 Setting for the IWSLT'14 DE<->EN dataset:
@@ -41,6 +35,39 @@ fairseq-train DATA-BIN -a transformer_iwslt_de_en \
         --maximize-best-checkpoint-metric  --task translation --mixratio 0.4 --temperature 4  \       
         --activation-dropout 0.1 --attention-dropout 0.1  --log-format json --log-interval 50
 ```
+
+## Dialog:
+
+Setting for the Persona-Chat dataset:
+
+"""
+fairseq-train DATA-BIN -a transformer \
+        --optimizer adam --lr 0.0001 -s cxt -t res --label-smoothing 0.1 --dropout 0.3 \
+        --max-tokens 4000 --min-lr '1e-09' \
+        --criterion label_smoothed_cross_entropy --max-update 20000 --warmup-updates 3000 \       
+        --warmup-init-lr '1e-07' --adam-betas '(0.9, 0.999)' --save-dir SAVE-DIR  \        
+        --share-all-embeddings --eval-bleu --eval-bleu-args '{"beam": 4, "max_len_a": 1.2, "max_len_b": 10}' \       
+        --eval-bleu-detok moses --eval-bleu-remove-bpe --eval-bleu-print-samples  --best-checkpoint-metric bleu \        
+        --maximize-best-checkpoint-metric  --task translation --mixratio 0.4 --temperature 4.5  \       
+        --activation-dropout 0.1 --attention-dropout 0.1  --log-format json --log-interval 50        
+"""
+
+Setting for the DailyDialog dataset:
+
+```
+fairseq-train DATA-BIN -a transformer \
+        --share-all-embeddings     --optimizer adam --adam-betas '(0.9, 0.98)' \
+        --clip-norm 0.0 --lr-scheduler inverse_sqrt     --warmup-init-lr 1e-07  \
+        ---warmup-updates 4000 --lr 0.0005 --min-lr 1e-09  --weight-decay 0.0 \       
+        --criterion label_smoothed_cross_entropy   --label-smoothing 0.1  --max-tokens 4096 \
+        --update-freq 2 --no-progress-bar  --log-format json --max-update 200000  \
+        --log-interval 10  --eval-bleu  --eval-bleu-args '{"beam": 4, "max_len_a": 1.2, "max_len_b": 10}' \
+        --eval-bleu-detok moses --eval-bleu-remove-bpe --eval-bleu-print-samples --best-checkpoint-metric bleu  \
+        --seed 1111  --source-lang s --target-lang t --save-dir SAVE-DIR  \
+        --temperature 4 --mixratio 0.5 \
+        --attention-dropout 0.1 --activation-dropout 0.1 --log-format json --log-interval 10  
+```
+
 
 ## Summarization:
 
