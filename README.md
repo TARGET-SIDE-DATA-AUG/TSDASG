@@ -137,7 +137,7 @@ Same as above.
         
 # MODIFICATION
 
-Bigger or smaller beta, schedule alpha, or more iterations aren't that good, so we didn't leave any args in commands to modify them. However, if you want to figure out their effects, you can follow our guide below to extend our code.        
+We find bigger or smaller beta, schedule alpha, or more iterations aren't that good. Therefore, we didn't leave any args in commands to specify them. However, if you want to figure out their effects, you can follow our guide below to extend our code.        
         
 ## Beta
 
