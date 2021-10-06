@@ -27,7 +27,7 @@ fairseq-train ./wmt14_ende/data-bin/ \
         --eval-bleu-detok moses --eval-bleu-remove-bpe \
         --valid-subset "valid,test" \
         --best-checkpoint-metric bleu --maximize-best-checkpoint-metric \
-        --seed 1 --mixratio 0.5 \
+        --seed 1 --alpha 0.5 \
         --no-avg-loss --temperature 2 --fp16
 ```
         
@@ -43,7 +43,7 @@ fairseq-train DATA-BIN -a transformer_iwslt_de_en \
         --warmup-init-lr '1e-07' --adam-betas '(0.9, 0.98)' --save-dir SAVE-DIR  \        
         --share-all-embeddings --eval-bleu --eval-bleu-args '{"beam": 5, "max_len_a": 1.2, "max_len_b": 10}' \       
         --eval-bleu-detok moses --eval-bleu-remove-bpe --eval-bleu-print-samples  --best-checkpoint-metric bleu \        
-        --maximize-best-checkpoint-metric  --task translation --mixratio 0.4 --temperature 4  \       
+        --maximize-best-checkpoint-metric  --task translation --alpha 0.4 --temperature 4  \       
         --activation-dropout 0.1 --attention-dropout 0.1  --log-format json --log-interval 50
 ```
 
@@ -57,7 +57,7 @@ fairseq-train DATA-BIN -a transformer_iwslt_de_en \
         --warmup-init-lr '1e-07' --adam-betas '(0.9, 0.98)' --save-dir SAVE-DIR  \        
         --share-all-embeddings --eval-bleu --eval-bleu-args '{"beam": 5, "max_len_a": 1.2, "max_len_b": 10}' \       
         --eval-bleu-detok moses --eval-bleu-remove-bpe --eval-bleu-print-samples  --best-checkpoint-metric bleu \        
-        --maximize-best-checkpoint-metric  --task translation --mixratio 0.4 --temperature 4  \       
+        --maximize-best-checkpoint-metric  --task translation --alpha 0.4 --temperature 4  \       
         --activation-dropout 0.1 --attention-dropout 0.1  --log-format json --log-interval 50
 ```
 
@@ -73,7 +73,7 @@ fairseq-train DATA-BIN -a transformer \
         --warmup-init-lr '1e-07' --adam-betas '(0.9, 0.999)' --save-dir SAVE-DIR  \        
         --share-all-embeddings --eval-bleu --eval-bleu-args '{"beam": 4, "max_len_a": 1.2, "max_len_b": 10}' \       
         --eval-bleu-detok moses --eval-bleu-remove-bpe --eval-bleu-print-samples  --best-checkpoint-metric bleu \        
-        --maximize-best-checkpoint-metric  --task translation --mixratio 0.4 --temperature 4.5  \       
+        --maximize-best-checkpoint-metric  --task translation --alpha 0.4 --temperature 4.5  \       
         --activation-dropout 0.1 --attention-dropout 0.1  --log-format json --log-interval 50        
 ```
 
@@ -89,7 +89,7 @@ fairseq-train DATA-BIN -a transformer \
         --log-interval 10  --eval-bleu  --eval-bleu-args '{"beam": 4, "max_len_a": 1.2, "max_len_b": 10}' \
         --eval-bleu-detok moses --eval-bleu-remove-bpe --eval-bleu-print-samples --best-checkpoint-metric bleu  \
         --seed 1111  --source-lang s --target-lang t --save-dir SAVE-DIR  \
-        --temperature 4 --mixratio 0.5 \
+        --temperature 4 --alpha 0.5 \
         --attention-dropout 0.1 --activation-dropout 0.1 --log-format json --log-interval 10  
 ```
 
@@ -98,7 +98,7 @@ fairseq-train DATA-BIN -a transformer \
 
 ### Other tasks:
 
-Our method is universal so that you can use it on other sequence generation tasks and datasets. You can find details in 'Ablation' in our paper to know how to set the best values of 'temperature' and 'mixratio' of datasets you are using.
+Our method is universal so that you can use it on other sequence generation tasks and datasets. You can find details in 'Ablation' in our paper to know how to set the best values of 'temperature' and 'alpha' of datasets you are using.
 
 ## EVALUATION 
 
