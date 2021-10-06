@@ -84,9 +84,9 @@ Our method is universal so that you can use it on other sequence generation task
 We use fairseq-generate command to evaluate BLEU score, using a command like this:
 
 ```
-fairseq-generate DATA-BIN --path CHECKPOINT-PATH/checkpoint_best.pt --source-lang en --target-lang de \
-
---remove-bpe  --beam 5  --quiet
+fairseq-generate DATA-BIN --path CHECKPOINT-PATH/checkpoint_best.pt \
+        --source-lang en --target-lang de \
+        --remove-bpe  --beam 5  --quiet
 ```
 
 ## Dialog: 
@@ -96,7 +96,8 @@ First of all, you should output the prediction of the test set to a file, using 
 ```
 fairseq-generate DATA-BIN --path CHECKPOINT-PATH/checkpoint_best.pt \
 
---source-lang s --target-lang t --remove-bpe  --beam 4  > FILE-NAME
+        --source-lang s --target-lang t --remove-bpe \
+        --beam 4  > FILE-NAME
 ```
 
 Then, use 'scripts/compute_score.py' to compute its BLEU score, and use 'scripts/eval_nlg.py' to compute metrics like Met., CIDEr, and R-L. You should specify which file to compute like this:
