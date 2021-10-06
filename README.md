@@ -24,7 +24,7 @@ fairseq-train DATA-BIN -a transformer_iwslt_de_en \
         --activation-dropout 0.1 --attention-dropout 0.1  --log-format json --log-interval 50
 ```
 
-3 ROUNS: 
+3 ROUNDS: 
 
 ```
 fairseq-train DATA-BIN -a transformer_iwslt_de_en \
