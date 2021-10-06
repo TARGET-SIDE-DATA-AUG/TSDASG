@@ -14,30 +14,31 @@ Setting for the WMT'14 EN->DE dataset:
 
 Setting for the IWSLT'14 DE<->EN dataset:
 
-2LUN
+2 ROUNDS:
 
-```
-
-```
-
-3LUN
 ```
 fairseq-train DATA-BIN -a transformer_iwslt_de_en \
+        --optimizer adam --lr 0.0005 -s de -t en --label-smoothing 0.1 --dropout 0.3 \
+        --max-tokens 4000 --min-lr '1e-09' --lr-scheduler inverse_sqrt --weight-decay 0.0001 \
+        --criterion label_smoothed_cross_entropy --max-update 30000 --warmup-updates 4000 \       
+        --warmup-init-lr '1e-07' --adam-betas '(0.9, 0.98)' --save-dir SAVE-DIR  \        
+        --share-all-embeddings --eval-bleu --eval-bleu-args '{"beam": 5, "max_len_a": 1.2, "max_len_b": 10}' \       
+        --eval-bleu-detok moses --eval-bleu-remove-bpe --eval-bleu-print-samples  --best-checkpoint-metric bleu \        
+        --maximize-best-checkpoint-metric  --task translation --mixratio 0.4 --temperature 4  \       
+        --activation-dropout 0.1 --attention-dropout 0.1  --log-format json --log-interval 50
+```
 
+3 ROUNS: 
+
+```
+fairseq-train DATA-BIN -a transformer_iwslt_de_en \
         --optimizer adam --lr 0.001 -s de -t en --label-smoothing 0.1 --dropout 0.3 \
-        
         --max-tokens 4500 --min-lr '1e-09' --lr-scheduler inverse_sqrt --weight-decay 0.00006 \
-        
-        --criterion label_smoothed_cross_entropy --max-update 30000 --warmup-updates 3000 \
-        
-        --warmup-init-lr '1e-07' --adam-betas '(0.9, 0.98)' --save-dir SAVE-DIR  \
-        
-        --share-all-embeddings --eval-bleu --eval-bleu-args '{"beam": 5, "max_len_a": 1.2, "max_len_b": 10}' \
-        
-        --eval-bleu-detok moses --eval-bleu-remove-bpe --eval-bleu-print-samples  --best-checkpoint-metric bleu \
-        
-        --maximize-best-checkpoint-metric  --task translation --mixratio 0.4 --temperature 4  \
-        
+        --criterion label_smoothed_cross_entropy --max-update 30000 --warmup-updates 3000 \       
+        --warmup-init-lr '1e-07' --adam-betas '(0.9, 0.98)' --save-dir SAVE-DIR  \        
+        --share-all-embeddings --eval-bleu --eval-bleu-args '{"beam": 5, "max_len_a": 1.2, "max_len_b": 10}' \       
+        --eval-bleu-detok moses --eval-bleu-remove-bpe --eval-bleu-print-samples  --best-checkpoint-metric bleu \        
+        --maximize-best-checkpoint-metric  --task translation --mixratio 0.4 --temperature 4  \       
         --activation-dropout 0.1 --attention-dropout 0.1  --log-format json --log-interval 50
 ```
 
